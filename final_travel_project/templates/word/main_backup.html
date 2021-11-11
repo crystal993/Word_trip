@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>word+rip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+   <link rel="stylesheet" href="../static/css/assets_dy/css/main.css" />
+   <noscript><link rel="stylesheet" href="../static/css/assets_dy/css/noscript.css" /></noscript>
+
+   <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js" type="text/JavaScript"></script>
+   <script type="text/javascript" src="/static/js/wordcloud.js"></script>
+
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<!--<body style="background-image: url('./static/images/main4.png'); background-repeat:no-repeat; background-position:center -30%; ">-->
+   <!--word cloud-->
+
+
+<body class="is-preload">
+
+<header>
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+      <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+        <a href="/" class="w3-bar-item w3-button" style="">Word Trip</a>
+
+        <!-- Right-sided navbar links. Hide them on small screens -->
+  <!--      <div class="w3-right w3-hide-small">
+          <a href="word/word_info" class="w3-bar-item w3-button">Word</a>
+          <a href="#menu" class="w3-bar-item w3-button">Attraction</a>
+        </div>-->
+      </div>
+    </div>
+</header>
+
+      <!-- Wrapper -->
+         <div id="wrapper">
+
+            <!-- Header -->
+               <header id="header">
+                  <div class="inner">
+
+                     <!-- Logo -->
+                        <a href="index.html" class="logo">
+                           <span class="symbol"><img src="../static/img/images_dy/slogo.png" alt="" /></span><span class="title">word+rip</span>
+                        </a>
+
+                     <!-- Nav -->
+                        <nav>
+                           <ul>
+                              <li><a href="#menu">Menu</a></li>
+                           </ul>
+                        </nav>
+
+                  </div>
+               </header>
+                <!-- Menu -->
+               <nav id="menu">
+                  <h2>Menu</h2>
+                  <ul>
+                     <li><a href="index.html">Home</a></li>
+                     <li><a href="generic.html">NationWide RK</a></li>
+                     <li><a href="generic.html">Place Recommand</a></li>
+                            <li><a href="generic.html">Region RK</a></li>
+                  </ul>
+               </nav>
+
+         <!--wordcloud-->
+         <div id="wordcloud"></div>
+
+         <!--명소 검색-->
+         <form action="/word/word_info" method="post">
+            <table>
+               <tr style="background-color:white; border-top:none; border-bottom:none;">
+                  <td style="width:800px;"><input style="margin-left:500px; width:500px;" placeholder="단어를 입력해 주세요." id="amount"
+                             name="word" type="text"
+                           onkeyup="inputNumberFormat(this)"/></td>
+                  <td><input style="width:180px;" class="tts_sj_button" type="submit" value="검색"></td>
+               </tr>
+            </table>
+         </form>
+
+
+            <div id="map">
+               지도 들어갈 자리
+            </div>
+
+
+                <!-- Footer -->
+               <footer style="height:100px;" id="footer">
+                  <div class="inner">
+
+                     <ul class="copyright">
+                        <li>&copy; Encore Final Project Team4</li><li>Design BY : 박영규 김수정 김현진 유준성 한다예</a></li>
+                     </ul>
+                  </div>
+               </footer>
+
+
+      <!-- Scripts -->
+         <script src="../static/css/assets_dy/js/jquery.min.js"></script>
+         <script src="../static/css/assets_dy/js/browser.min.js"></script>
+         <script src="../static/css/assets_dy/js/breakpoints.min.js"></script>
+         <script src="../static/css/assets_dy/js/util.js"></script>
+         <script src="../static/css/assets_dy/js/main.js"></script>
+      <!--검색-->
+      <!-- Jquery JS-->
+          <script src="../static/css/css_dy/vendor/jquery/jquery.min.js"></script>
+       <!-- Vendor JS-->
+          <script src="../static/css/css_dy/vendor/select2/select2.min.js"></script>
+          <script src="../static/css/css_dy/vendor/jquery-validate/jquery.validate.min.js"></script>
+          <script src="../static/css/css_dy/vendor/bootstrap-wizard/bootstrap.min.js"></script>
+             <script src="../static/css/css_dy/vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+             <script src="../static/css/css_dy/vendor/datepicker/moment.min.js"></script>
+          <script src="../static/css/css_dy/vendor/datepicker/daterangepicker.js"></script>
+
+       <!-- Main JS-->
+          <script src="../static/css/css_dy/js/global.js"></script>
+   </div>
+</body>
+</html>

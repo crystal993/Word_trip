@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+      <link rel="stylesheet" href="../static/css/assets_dy/css/main.css" />
+      <noscript><link rel="stylesheet" href="../static/css/assets_dy/css/noscript.css" /></noscript>
+
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      <script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?appkey=7568d4542e66cafea132eadb26623050&libraries=services,clusterer,drawing'></script>
+
+     <link rel="stylesheet" type="text/css" href="../static/css/loading.css"/>
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+
+      <style type="text/css">
+              .loader {
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: url('../static/img/loading.gif') 50% 50% no-repeat rgb(249,249,249);
+          opacity: 0.5;
+          display: none;
+      }
+      </style>
+
+     <script type="text/javascript">
+
+
+         function showLoader(){
+        //show loader onclcik of button
+         $('.loader').css('display','block');
+        setTimeout(function(){
+            var changedText = 'Text changes';
+            $('#div1').html(changedText);// enter text here to required changes
+             $('.loader').css('display','none');
+        }, 1000000);
+         }
+
+
+     </script>
+
+      <title>word+rip</title>
+   </head>
+
+   <body class="is-preload">
+      <!-- Wrapper -->
+      <div id="wrapper">
+         <!-- Header -->
+         <header id="header">
+            <div class="inner">
+               <!-- Logo -->
+               <a href="/" class="logo">
+                  <span class="symbol"><img src="../static/img/images_dy/slogo.png" alt="" /></span><span class="title">word+rip</span>
+               </a>
+
+               <!-- Nav -->
+               <nav>
+                  <ul>
+                     <li><a href="#menu">Menu</a></li>
+                  </ul>
+               </nav>
+            </div>
+         </header>
+
+         <!-- Menu -->
+         <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+               <li><a href="/">Home</a></li>
+               <li><a href="/word/main">Word</a></li>
+               <li><a href="/attraction/main">Attraction</a></li>
+            </ul>
+         </nav>
+
+          <!--명소 검색-->
+         <form action="/attraction/place_recommend" method="post">
+            <table>
+               <tr style="background-color:white; border-top:none; border-bottom:none;">
+                  <td style="width:800px;">
+                     <input style="margin-left:400px; width:500px;" placeholder="명소를 입력해 주세요." id="amount" name="place" type="text" onkeyup="inputNumberFormat(this)"/>
+                  </td>
+                  <td>
+
+                    <div class="loader"></div>
+                    <input style="width:180px;" class="tts_sj_button" type="submit" onclick="showLoader();" value="검색">
+
+                 </td>
+               </tr>
+            </table>
+         </form>
+
+         <div id="map" style="width:600px;height:400px; margin:auto; margin-top:10px;"></div>
+
+         <!-- Footer -->
+         <footer style="height:50px;" id="footer">
+            <div class="inner">
+               <ul class="copyright">
+                  <li style ="text-align:center;">&copy; Encore Final Project Team4</li><li>Design BY : 박영규 김수정 김현진 유준성 한다예</a></li>
+               </ul>
+            </div>
+         </footer>
+
+         <script type="text/javascript">
+            var container = document.getElementById('map');
+
+            var radius = 1000;
+            var markerList = [];
+            var markerDistList = [];
+            var compareI = 0;
+
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            navigator.geolocation.getCurrentPosition(function(position) {
+               var lat = position.coords.latitude;     // 접속 위치 위도
+               var lon = position.coords.longitude;    // 접속 위치 경도
+
+               var currentPosition = new kakao.maps.LatLng(lat, lon) // 접속위치
+               var currentPositionRegion = '';
+
+               searchAddrFromCoords(currentPosition, function(result, status) {
+                  var detailAddr = !!result[0].road_address ? result[0].road_address.address_name : '';
+                  detailAddr += result[0].address.address_name;
+                  console.log(result[0].address.region_2depth_name);
+
+                  console.log("현재 주소 : " + detailAddr);
+
+                  currentPositionRegion = result[0].address.region_2depth_name;
+               });
+
+               var options = {
+                           center : currentPosition,
+                           level : 9
+               };
+
+               var map = new kakao.maps.Map(container, options);
+
+               {% for s in closeSiteList %}
+                  geocoder.addressSearch('{{s.address}}', function(result, status) {
+
+                     try {
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                     } catch (Exception) {
+                        return;
+                     }
+
+                     // 결과값으로 받은 위치를 마커로 표시합니다
+                     // 마커 이미지의 이미지 주소입니다
+                     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                     var imageSize = new kakao.maps.Size(24, 35);
+                     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                     var marker = new kakao.maps.Marker({
+                                 map: map,
+                                 position: coords,
+                                 title : '{{s.attr_name}}', // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                                 image : markerImage // 마커 이미지
+                     });
+
+                     var poly = new kakao.maps.Polyline({
+                                    path: [map.getCenter(), marker.getPosition()]
+                     });
+
+                     var dist = poly.getLength();
+
+                     if (dist < radius) {
+                        marker.setMap(map)
+                     } else {
+                        marker.setMap(null);
+                     }
+
+                     var iwContent = '<div style="width:400px;padding:5px; ">명소 이름:{{s.attr_name}}<br>주소 : {{s.address}} </div>', iwRemoveable = true;
+
+                     // 인포윈도우를 생성합니다
+                     var infowindow = new kakao.maps.InfoWindow({
+                                          content : iwContent,
+                     });
+
+                     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+                     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+                     function makeOverListener(map, marker, infowindow) {
+                        return function() {
+                           infowindow.open(map, marker);
+                        };
+                     }
+
+                     // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+                     function makeOutListener(infowindow) {
+                        return function() {
+                              infowindow.close();
+                        };
+                     }
+
+                     kakao.maps.event.addListener(marker, 'click', function() {
+                        // 클릭 이벤트 발동시 해당 링크로 이동합니다.
+                        location.href='/word/detail/detail/{{s.attr_name}}';
+                     });
+                  });
+               {% endfor %}
+            });
+
+            function searchAddrFromCoords(coords, callback) {
+               geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+            }
+        </script>
+
+         <script src="../static/css/assets_dy/js/jquery.min.js"></script>
+         <script src="../static/css/assets_dy/js/browser.min.js"></script>
+         <script src="../static/css/assets_dy/js/breakpoints.min.js"></script>
+         <script src="../static/css/assets_dy/js/util.js"></script>
+         <script src="../static/css/assets_dy/js/main.js"></script>
+
+         <script src="../static/css/css_dy/vendor/jquery/jquery.min.js"></script>
+
+         <script src="../static/css/css_dy/vendor/select2/select2.min.js"></script>
+         <script src="../static/css/css_dy/vendor/jquery-validate/jquery.validate.min.js"></script>
+         <script src="../static/css/css_dy/vendor/bootstrap-wizard/bootstrap.min.js"></script>
+         <script src="../static/css/css_dy/vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+         <script src="../static/css/css_dy/vendor/datepicker/moment.min.js"></script>
+         <script src="../static/css/css_dy/vendor/datepicker/daterangepicker.js"></script>
+
+         <script src="../static/css/css_dy/js/global.js"></script>
+      </div>
+   </body>
+</html>

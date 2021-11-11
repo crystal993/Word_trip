@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+        <link rel="stylesheet" href="/static/css/korea.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+        <link rel="stylesheet" href="../../static/css/assets_dy/css/main.css" />
+
+        <noscript><link rel="stylesheet" href="../../static/css/assets_dy/css/noscript.css" /></noscript><link rel="stylesheet" href="/static/css/korea.css" />
+
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!--그래프 그리기 위함-->
+        <script type="text/javascript" src="/static/js/d3.js"></script>
+        <script type="text/javascript" src="/static/js/korea2.js"></script>
+
+        <style>
+            body {font-family: "Times New Roman", Georgia, Serif;}
+            h1, h2, h3, h4, h5, h6 {
+              font-family: "Playfair Display";
+              letter-spacing: 5px;
+            }
+
+            .bgimg {
+              background-image: url('./static/images/main.jpg');
+              min-height: 100%;
+              background-position: center;
+              background-size: cover;
+        </style>
+
+        <title>Place Recommend</title>
+    </head>
+
+    <body class="is-preload">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="inner">
+                    <!-- Logo -->
+                    <a href="/" class="logo">
+                        <span class="symbol"><img src="../../static/img/images_dy/slogo.png" alt="" /></span><span class="title">word+rip</span>
+                    </a>
+
+                    <!-- Nav -->
+                    <nav>
+                        <ul>
+                            <li><a href="#menu">Menu</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- Menu -->
+            <nav id="menu">
+                <h2>Menu</h2>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/word/main">Word</a></li>
+                    <li><a href="/attraction/main">Attraction</a></li>
+                </ul>
+            </nav>
+
+            <div id="main">
+                <div class="inner">
+                    <h2>유사도에 따른 최적의 추천 명소입니다!</h2>
+                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                    <div class="chart" id="graph">
+                        <script type="text/javascript" style="float:right">
+                            var graphs = {{graphJSON |safe}}; //json 안전하게 받아오기, 문자열이었던 듯
+                            let g = JSON.parse(graphs); //json 형태로 다시 파싱을 해줘야한다.
+                            console.log(g)
+                            Plotly.plot('graph', g , {});
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div id="container" style="width:300px; height:500px; float:left"></div>
+
+            <div style="display:inline-block; width:700px; height:800px; margin-left:500px;"> <!-- 테이블 -->
+                <table style="display:table; vertical-align:middle; height:600px; font-family:arial;" border="1">
+                    {% for p in place %}
+                        <tr>
+                            <td style="width:120px;">{{ loop.index }}위</td>
+                            <td style="width:250px;">{{p.gu_name}}</td>
+                            <td style="width:600px;"><a href="/attraction/detail/detail/{{p.place_name}}">{{p.place_name}}</a></td>
+                            <td>{{p.score}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <!-- Footer -->
+            <footer style="height:50px;" id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; Encore Final Project Team4</li><li>Design BY : 박영규 김수정 김현진 유준성 한다예</a></li>
+                    </ul>
+                </div>
+            </footer>
+
+        <script src="../../static/css/assets_dy/js/jquery.min.js"></script>
+        <script src="../../static/css/assets_dy/js/browser.min.js"></script>
+        <script src="../../static/css/assets_dy/js/breakpoints.min.js"></script>
+        <script src="../../static/css/assets_dy/js/util.js"></script>
+        <script src="../../static/css/assets_dy/js/main.js"></script>
+        </div>
+    </body>
+</html>

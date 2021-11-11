@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Word+rip</title>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+        <style>
+            body {font-family: "Times New Roman", Georgia, Serif;}
+            h1, h2, h3, h4, h5, h6 {
+              font-family: "Times New Roman", Georgia, Serif;
+              letter-spacing: 5px;
+              font-weight:bold;
+            }
+
+            .bgimg {
+              background-image: url('./static/images/main.jpg');
+              min-height: 100%;
+              background-position: center;
+              background-size: cover;
+        </style>
+
+        <!-- 폰트  -->
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <header>
+            <!-- Navbar (sit on top) -->
+            <div class="w3-top">
+                <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+                    <a href="/" class="w3-bar-item w3-button" style="font-family: Source Sans Pro, Helvetica, sans-serif; font-size: 16pt; font-weight: 300; line-height: 1.75;">Word Trip</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- &lt;!&ndash; 에러났을 때 경고문 -->
+        {%with messages = get_flashed_messages()%}
+            {% if messages %}
+                <script type="text/javascript">
+                    alert("{{messages[-1]}}");
+                </script>
+            {% endif %}
+        {%endwith%}
+
+        <section class="tiles">
+            <article class="style1">
+                <span class="image">
+                    <img height="700" src="https://pbs.twimg.com/media/D4whPmAUEAAkNrT.jpg" alt="" />
+                </span>
+                <a href="/word/main">
+                    <h2>Word</h2>
+                    <div class="content">
+                        <p>단어를 통해 여행지를 검색해 보세요.</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="style2">
+                <span class="image">
+                    <img height="700" src="https://i.pinimg.com/originals/f3/60/98/f36098b9355afdad7aef498652ca52cc.jpg" alt="" />
+                </span>
+                <a href="/attraction/main">
+                    <h2>Attraction</h2>
+                    <div class="content">
+                        <p>명소 이름을 통해 여행지를 검색해 보세요.</p>
+                    </div>
+                </a>
+            </article>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+#container {
+    display:inline-block;
+	width: 800px;
+	min-height: 700px;
+	margin-left: 200px;
+	fill: white;
+}
+#states path {
+	fill: silver;
+	stroke: white;
+	stroke-width: 1.5px;
+
+}
+
+#states path:hover {
+	fill: gray;
+}
+
+#states .active {
+	fill: gray;
+}
+
+#states .activeDetail {
+	fill: gray;
+}
+
+#states path {
+	cursor: pointer;
+}
+
+#states text {
+	cursor: pointer;
+	font-size: 12px;
+	fill: #fff;
+}
