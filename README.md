@@ -34,11 +34,15 @@
 <br><br>
 ### - 자연어 전처리 전
 <br>
+
 ![image](https://user-images.githubusercontent.com/72599761/144172830-91c7c759-9877-4e17-9b81-428446d7abb2.png)
+
 <br>
 ### - 자연어 전처리 후
 <br>
+
 ![image](https://user-images.githubusercontent.com/72599761/144172860-865aad5b-8b29-4572-8faf-baae46e97caa.png)
+
 <br><br><br>
 
 ## 3단계 : 코사인 유사도에 따른 추천 시스템 
@@ -46,8 +50,11 @@
 첫번째는 단어(키워드) 기반 추천 시스템이고, 두번째는 명소 기반 추천 시스템이다. <br>
 두가지 방식의 차이는 Word2Vec모델을 활용유무에 따라 나뉩니다. </p> 
 <br><br>
+
 ![image](https://user-images.githubusercontent.com/72599761/144172900-aac4b35d-d2c2-4781-9fdb-3d345e857dcc.png)
+
 <br>
+
 ### 1. 단어(키워드) 기반 추천 시스템 
 
 ### 2. 입력한 여행 명소 기반 추천 시스템 
@@ -58,23 +65,45 @@
 
 ## 4단계 : 웹 애플리케이션 (Flask)
 <p>flask를 활용하여 Web Application을 구현하였습니다. </p>
+
 <br><br>
 
 ### 1. 메인 화면
+
 ![main](https://user-images.githubusercontent.com/72599761/144175404-54e796f0-2dd6-4383-aed0-d09999afe852.png)
+
 <br><br>
 
 ### 2. 감성 단어 기반 여행 명소 추천시스템
+
+<br><br>
+
 ![word_1](https://user-images.githubusercontent.com/72599761/144175426-6f883505-2bfe-4585-bad1-067f036d702d.png)
 
+<br><br>
+
 ![word_2](https://user-images.githubusercontent.com/72599761/144175437-44dac374-ad33-4a89-b8c9-c62353727d4c.png)
+
+<br><br>
+
 ![word_3](https://user-images.githubusercontent.com/72599761/144175446-7143c09e-6ac1-4e97-b4bc-c9394114ff43.png)
+
+<br><br>
+
 ![word_4](https://user-images.githubusercontent.com/72599761/144175469-ae1abd59-6ee5-4021-8fd6-a127324788d9.png)
+
 <br><br>
 
 ### 3. 검색한 여행 명소와 유사한 여행 명소 추천 시스템
+
+<br><br>
+
 ![attraction_1](https://user-images.githubusercontent.com/72599761/144175481-6b2ef1d0-fc5c-4c7c-b231-16a302cb1e30.png)
+
+<br><br>
+
 ![attraction_2](https://user-images.githubusercontent.com/72599761/144175491-e6ecec26-329d-4922-83f3-88df4ef30103.png)
+
 <br><br>
 
 
