@@ -10,6 +10,12 @@
 - 명소 기반 추천 시스템은 사용자가 입력한 <b>여행 명소</b> 키워드와 유사한 단어를 TF-IDF가중치를 구한 후, 코사인 유사도를 추출하여 추천합니다. 
 <br><br><br>
 
+
+## - 선정 이유 
+
+<p> 이전 프로젝트 '편행 : 편한 여행' 에서는 여행지를 검색했을 때 1박 2일 교통편, 숙박편만 추천해주는 시스템이었다. <br>
+여행지에 관한 정보는 제공하지 않기 때문에 이를 보완하기 위해 여행지 추천 시스템을 제작하게 되었다. </p> <br>
+
 ![image](https://user-images.githubusercontent.com/72599761/144172604-e02bfda2-3fe0-4277-bbd0-5dc295de266f.png)
 <br><br><br>
 
@@ -60,9 +66,42 @@
 
 <br>
 
-### 1. 단어(키워드) 기반 추천 시스템 
+```
+gu_name=''
+def getRecommendation(gu_name = gu_name):
+    
+    # TF-IDF
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    tfidf = TfidfVectorizer()
+    Tfidf_matrix = tfidf.fit_transform(place_df.word)
 
-### 2. 입력한 여행 명소 기반 추천 시스템 
+    # 코사인유사도 : TF-IDF가중치를 기반으로 생성
+    from sklearn.metrics.pairwise import linear_kernel
+    cosine_sim = linear_kernel(Tfidf_matrix, Tfidf_matrix)
+    
+    #코사인유사도
+    simScores = list(enumerate(cosine_sim[-1])) 
+    
+    # simScores : 튜플 (인덱스,코사인유사도)
+    simScores = sorted(simScores, key=lambda x: x[1] ,reverse=True) # score 순으로 정렬
+    
+    # 코사인유사도 기준 내림차순 정렬된 튜플중 자기 제외(0번째인덱스)하고 300개 뽑음
+    simScores = simScores[1:300]
+    
+    # 상위 300개 장소의 인덱스값 저장
+    idx = [i[0] for i in simScores]
+    
+    # 상위 300개 장소를 저장     
+    RecPlacelist = train_data2.iloc[idx]
+    
+    # score 열에 코사인 유사도 값도 저장     
+    RecPlacelist['score'] = [i[1] for i in simScores]
+    
+    # 해당 구 이름에 해당하는 여행지 10개 출력    
+    return RecPlacelist[RecPlacelist['gu_name']==gu_name].head(10)
+
+```
+
 
 <br><br><br>
 
