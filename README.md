@@ -168,6 +168,6 @@ def getRecommendation(gu_name = gu_name):
 
 ![attraction_2](https://user-images.githubusercontent.com/72599761/144175491-e6ecec26-329d-4922-83f3-88df4ef30103.png)
 
-<br><br>
+<br><br><BR>
 
 
