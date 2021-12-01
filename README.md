@@ -66,7 +66,7 @@
 
 <br>
 
-```
+```python
 gu_name=''
 def getRecommendation(gu_name = gu_name):
     
