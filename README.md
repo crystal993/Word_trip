@@ -31,14 +31,19 @@
 5. Okt()를 이용하여 형태소를 분석 후 데이터 ‘명사’ ,’형용사’ 형태로 토큰화 <br> 
 6. Stopwords를 이용하여 불용어 제거 <br> 
 7. 명소와 명소에 해당하는 리뷰 단어 사전 만들기 <br>  </p>
+
 <br><br>
+
 ### - 자연어 전처리 전
+
 <br>
 
 ![image](https://user-images.githubusercontent.com/72599761/144172830-91c7c759-9877-4e17-9b81-428446d7abb2.png)
 
 <br>
+
 ### - 자연어 전처리 후
+
 <br>
 
 ![image](https://user-images.githubusercontent.com/72599761/144172860-865aad5b-8b29-4572-8faf-baae46e97caa.png)
@@ -76,19 +81,33 @@
 
 ### 2. 감성 단어 기반 여행 명소 추천시스템
 
-<br><br>
+<br>
+
+### (1). 감성 단어 검색
 
 ![word_1](https://user-images.githubusercontent.com/72599761/144175426-6f883505-2bfe-4585-bad1-067f036d702d.png)
 
 <br><br>
 
+### (2). 단어와 관련된 Word2Vec 모델 그래프로 시각화  
+
 ![word_2](https://user-images.githubusercontent.com/72599761/144175437-44dac374-ad33-4a89-b8c9-c62353727d4c.png)
 
 <br><br>
 
+### (3).  검색 키워드와 유사도가 높은 순으로 서울 내 여행지 10개 추천  
+
+<p> 서울시 25개구 중 원하는 구를 클릭하면 1위부터 10위까지 코사인 유사도가 높은 순으로 여행지 추천 </p> 
+
+<br>
+
 ![word_3](https://user-images.githubusercontent.com/72599761/144175446-7143c09e-6ac1-4e97-b4bc-c9394114ff43.png)
 
 <br><br>
+
+### (4). 해당 여행지 클릭하면 상세 정보 확인 가능 
+
+<br>
 
 ![word_4](https://user-images.githubusercontent.com/72599761/144175469-ae1abd59-6ee5-4021-8fd6-a127324788d9.png)
 
@@ -98,9 +117,13 @@
 
 <br><br>
 
+### (1). 여행 명소 검색
+
 ![attraction_1](https://user-images.githubusercontent.com/72599761/144175481-6b2ef1d0-fc5c-4c7c-b231-16a302cb1e30.png)
 
 <br><br>
+
+### (2). 검색 키워드와 유사도가 높은 순으로 서울 내 여행지 10개 추천  
 
 ![attraction_2](https://user-images.githubusercontent.com/72599761/144175491-e6ecec26-329d-4922-83f3-88df4ef30103.png)
 
